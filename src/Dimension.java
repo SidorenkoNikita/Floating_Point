@@ -4,8 +4,8 @@ import java.io.IOException;
  * Created by Nikita on 12.02.2017.
  */
 public class Dimension {
-    public int dimOfRealPart;
-    public int dimOfIntegerPart;
+    public int dimOfExp;
+    public int dimOfMantis;
 
     @Override
     public boolean equals(Object o) {
@@ -14,49 +14,49 @@ public class Dimension {
 
         Dimension dimension = (Dimension) o;
 
-        if (dimOfRealPart != dimension.dimOfRealPart) return false;
-        return dimOfIntegerPart == dimension.dimOfIntegerPart;
+        if (dimOfExp != dimension.dimOfExp) return false;
+        return dimOfMantis == dimension.dimOfMantis;
 
     }
 
     @Override
     public int hashCode() {
-        int result = dimOfRealPart;
-        result = 31 * result + dimOfIntegerPart;
+        int result = dimOfExp;
+        result = 31 * result + dimOfMantis;
         return result;
-    }
-
-    public int getDimOfRealPart() {
-        return dimOfRealPart;
-    }
-
-    public int getDimOfIntegerPart() {
-        return dimOfIntegerPart;
-    }
-
-    public void setDimOfIntegerPart(int dimOfIntegerPart) {
-        this.dimOfIntegerPart = dimOfIntegerPart;
-    }
-
-    public void setDimOfRealPart(int dimOfRealPart) {
-        this.dimOfRealPart = dimOfRealPart;
     }
 
     @Override
     public String toString() {
         return "Dimension{" +
-                "dimOfRealPart=" + dimOfRealPart +
-                ", dimOfIntegerPart=" + dimOfIntegerPart +
+                "dimOfExp=" + dimOfExp +
+                ", dimOfMantis=" + dimOfMantis +
                 '}';
     }
 
-    public boolean checkForDimension(Floating_Point dimm) throws IOException{
-        String x = dimm.toString().substring(dimm.toString().indexOf("."));
-        if (((x.length() - dimOfRealPart) == 0)&&(dimm.toString().length()-1 - dimOfIntegerPart - dimOfRealPart == 0)) {
-            return true;
+    public int getDimOfExp() {
+        return dimOfExp;
+    }
+
+    public void setDimOfExp(int dimOfExp) {
+        this.dimOfExp = dimOfExp;
+    }
+
+    public int getDimOfMantis() {
+        return dimOfMantis;
+    }
+
+    public void setDimOfMantis(int dimOfMantis) {
+        this.dimOfMantis = dimOfMantis;
+    }
+
+    public boolean checkForDim(Floating_Point b){
+        if(b.dim.equals(this)) {
+            return  true;
         }
         else {
             return false;
         }
     }
+
 }

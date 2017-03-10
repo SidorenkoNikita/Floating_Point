@@ -4,26 +4,9 @@ import java.io.IOException;
  * Created by Nikita on 12.02.2017.
  */
 public class Floating_Point {
-    public byte octothorpe;
-    public int integerPart;
-    public int realPart;
+    public int mantis;
+    public int Exp;
     public Dimension dim;
-    @Override
-    public String toString(){
-        return "" + this.integerPart+"."+this.realPart;
-    }
-    public void sum(Floating_Point a) throws IOException{
-        if ((dim.equals(a.dim))&&(dim.checkForDimension(this))&&(a.dim.checkForDimension(a))) {
-            if ((octothorpe * integerPart + a.octothorpe * a.integerPart)- dim.dimOfIntegerPart <= 0) {
-                integerPart = octothorpe * integerPart + a.octothorpe * a.integerPart;
-            }
-            realPart = a.realPart;
-        }
-        else {
-            IOException e = new IOException();
-            throw e;
-        }
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -32,55 +15,70 @@ public class Floating_Point {
 
         Floating_Point that = (Floating_Point) o;
 
-        if (octothorpe != that.octothorpe) return false;
-        if (integerPart != that.integerPart) return false;
-        if (realPart != that.realPart) return false;
-        return dim.equals(that.dim);
+        if (mantis != that.mantis) return false;
+        if (Exp != that.Exp) return false;
+        return dim != null ? dim.equals(that.dim) : that.dim == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = (int) octothorpe;
-        result = 31 * result + integerPart;
-        result = 31 * result + realPart;
-        result = 31 * result + dim.hashCode();
+        int result = mantis;
+        result = 31 * result + Exp;
+        result = 31 * result + (dim != null ? dim.hashCode() : 0);
         return result;
     }
 
-    public byte getOctothorpe() {
-        return octothorpe;
+    @Override
+    public String toString() {
+        return ""+ mantis + "E" + Exp;
     }
 
-    public void setOctothorpe(byte octothorpe) {
-        this.octothorpe = octothorpe;
+    public int getMantis() {
+        return mantis;
     }
 
-    public int getIntegerPart() {
-        return integerPart;
+    public void setMantis(int mantis) {
+        this.mantis = mantis;
     }
 
-    public void setIntegerPart(int integerPart) {
-        this.integerPart = integerPart;
+    public int getExp() {
+        return Exp;
     }
 
-    public int getRealPart() {
-        return realPart;
+    public void setExp(int exp) {
+        Exp = exp;
     }
 
-    public void setRealPart(int realPart) {
-        this.realPart = realPart;
+    public boolean checkForLenght(Floating_Point a){
+        String mantis = a.toString().substring(0,a.toString().indexOf("E"));
+        String exp = a.toString().substring(a.toString().indexOf("E"));
+        if (!(mantis.length() - a.dim.dimOfMantis <= 0) || !(exp.length()- a.dim.dimOfExp <= 0)){
+            return false;
+        }
+        else {
+            return  true;
+        }
     }
-
-    public Dimension getDim() {
-        return dim;
+    public boolean checkForLenghtOfExp(Floating_Point a){
+        String mantis = a.toString().substring(0,a.toString().indexOf("E"));
+        String exp = a.toString().substring(a.toString().indexOf("E"));
+        if (!(mantis.length() - a.dim.dimOfMantis <= 0) || !(exp.length()- a.dim.dimOfExp <= 0)){
+            return false;
+        }
+        else {
+            return  true;
+        }
     }
+    public void sum (Floating_Point a, Floating_Point b)throws IOException{
+        if((a.dim.checkForDim(b))&&(checkForLenght(a))&&(checkForLenght(b))){
+            if (a.Exp - b.Exp <= ){
 
-    public void setDim(Dimension dim) {
-        this.dim = dim;
-    }
-
-    public void subtraction(Floating_Point a){
-        integerPart = integerPart + a.integerPart;
+            }
+        }
+        else {
+            IOException e = new IOException();
+            throw e;
+        }
     }
 }
