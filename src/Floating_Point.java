@@ -70,10 +70,11 @@ public class Floating_Point {
             return  true;
         }
     }
-    public void sum (Floating_Point a, Floating_Point b)throws IOException{
-        if((a.dim.checkForDim(b))&&(checkForLenght(a))&&(checkForLenght(b))){
-            if (a.Exp - b.Exp <= ){
-
+    public void sum (Floating_Point b)throws IOException{
+        if((this.dim.checkForDim(b))&&(checkForLenght(this))&&(checkForLenght(b))){
+            if (this.Exp <= b.Exp){
+                this.mantis = this.mantis*10^(this.Exp-b.Exp)+b.mantis;
+                this.Exp=b.Exp;
             }
         }
         else {
