@@ -3,6 +3,7 @@ import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import java.io.IOException;
 
 import static java.lang.Math.abs;
+import static  java.lang.Math.pow;
 
 /**
  * Created by Nikita on 12.02.2017.
@@ -62,20 +63,20 @@ public class Floating_Point {
         this.dim = dim;
     }
 
-    public boolean checkForLenght(Floating_Point a) {
-        String mantis = a.toString().substring(0, a.toString().indexOf("E"));
-        String exp = a.toString().substring(a.toString().indexOf("E"));
-        if (!(mantis.length() - a.dim.dimOfMantis <= 0) || !(exp.length() - a.dim.dimOfExp <= 0)) {
+    public boolean checkForLenght() {
+        String mantis = this.toString().substring(0, this.toString().indexOf("E")-1);
+        String exp = this.toString().substring(this.toString().indexOf("E")+1);
+        if (!(mantis.length() - this.dim.dimOfMantis <= 0) || !(exp.length() - this.dim.dimOfExp <= 0)) {
             return false;
         } else {
             return true;
         }
     }
 
-    public boolean checkForLenghtOfExp(Floating_Point a) {
-        String mantis = a.toString().substring(0, a.toString().indexOf("E"));
-        String exp = a.toString().substring(a.toString().indexOf("E"));
-        if (!(mantis.length() - a.dim.dimOfMantis <= 0) || !(exp.length() - a.dim.dimOfExp <= 0)) {
+    public boolean checkForLenghtOfExp() {
+        String mantis = this.toString().substring(0, this.toString().indexOf("E"));
+        String exp = this.toString().substring(this.toString().indexOf("E"));
+        if (!(mantis.length() - this.dim.dimOfMantis <= 0) || !(exp.length() - this.dim.dimOfExp <= 0)) {
             return false;
         } else {
             return true;
@@ -83,14 +84,14 @@ public class Floating_Point {
     }
 
     public void sum(Floating_Point b) throws IOException {
-        if ((this.dim.checkForDim(b)) && (checkForLenght(this)) && (checkForLenght(b))) {
+        if ((this.dim.checkForDim(b)) && (this.checkForLenght()) && (b.checkForLenght())) {
             if (this.Exp <= b.Exp) {
-                this.mantis = this.mantis * 10 ^ (b.Exp - this.Exp) + b.mantis;
-                this.Exp = b.Exp;
+                this.mantis = (int)(this.mantis + b.mantis * pow (10,(b.Exp - this.Exp)));
             } else {
-                this.mantis = this.mantis + b.mantis * 10 ^ (this.Exp - b.Exp);
+                this.mantis = (int)(this.mantis * pow  (10,this.Exp - b.Exp) + b.mantis);
+                this.Exp = this.Exp - b.Exp;
             }
-            if (!checkForLenght(this)) {
+            if (!this.checkForLenght()) {
                 IOException e = new IOException();
                 throw e;
             }
@@ -101,14 +102,14 @@ public class Floating_Point {
     }
 
     public void sub(Floating_Point b) throws IOException {
-        if ((this.dim.checkForDim(b)) && (checkForLenght(this)) && (checkForLenght(b))) {
+        if ((this.dim.checkForDim(b)) && (this.checkForLenght()) && (b.checkForLenght())) {
             if (this.Exp <= b.Exp) {
-                this.mantis = this.mantis * 10 ^ (b.Exp - this.Exp) - b.mantis;
+                this.mantis = (int)(this.mantis  - b.mantis*  pow (10,b.Exp - this.Exp));
                 this.Exp = b.Exp;
             } else {
-                this.mantis = this.mantis - b.mantis * 10 ^ (this.Exp - b.Exp);
+                this.mantis = (int)(this.mantis *pow (10,b.Exp - this.Exp) - b.mantis) ;
             }
-            if (!checkForLenght(this)) {
+            if (!this.checkForLenght()) {
                 IOException e = new IOException();
                 throw e;
             }
@@ -118,7 +119,7 @@ public class Floating_Point {
         }
     }
     public void div(Floating_Point b) throws IOException{
-        if ((this.dim.checkForDim(b)) && (checkForLenght(this)) && (checkForLenght(b))) {
+        if ((this.dim.checkForDim(b)) && (this.checkForLenght()) && (b.checkForLenght())) {
             double addmantis = this.mantis / b.mantis;
             int addExp = this.Exp - b.Exp;
             while (abs(addmantis) < 1) {
@@ -127,7 +128,7 @@ public class Floating_Point {
             }
             this.mantis = (int)addmantis;
             this.Exp = addExp;
-            if (!checkForLenght(this)){
+            if (!this.checkForLenght()){
                 IOException e = new IOException();
                 throw e;
             }
@@ -138,12 +139,12 @@ public class Floating_Point {
         }
     }
     public void multi (Floating_Point b) throws IOException{
-        if ((this.dim.checkForDim(b)) && (checkForLenght(this)) && (checkForLenght(b))) {
+        if ((this.dim.checkForDim(b)) && (this.checkForLenght()) && (b.checkForLenght())) {
             double addmantis = this.mantis * b.mantis;
             int addExp = this.Exp + b.Exp;
             this.mantis = (int)addmantis;
             this.Exp = addExp;
-            if (!checkForLenght(this)){
+            if (!this.checkForLenght()){
                 IOException e = new IOException();
                 throw e;
             }
