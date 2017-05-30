@@ -87,26 +87,36 @@ public class Dimension {
     @Override
     public String toString() {
         String result = "";
-        int i;
         for (Map.Entry entry: dimOfNumenator.entrySet()) {
-
-            Key K= entry.getKey();
-            Value V = entry.getValue();
-            result = K+V;
+            result += entry.getValue().toString() + entry.getKey().toString()+" ";
         }
         result = result + "/";
         for (Map.Entry entry: dimOfDenominator.entrySet()) {
-
-            Key K= entry.getKey();
-            Value V = entry.getValue();
-            result += K+V;
+            result += entry.getValue().toString() + entry.getKey().toString()+" ";
         }
     }
     public int toBase(){
-
+        int result = 0;
+        for (Map.Entry entry: dimOfNumenator.entrySet()){
+            result = translationTable.get(entry.getValue().toString());
+            dimOfNumenator.put(entry.getKey().toString(),"");
+        }
+        for (Map.Entry entry: dimOfDenominator.entrySet()){
+            result = translationTable.get(entry.getValue().toString());
+            dimOfDenominator.put(entry.getKey().toString(),"");
+        }
+        return result;
     }
     public void fromString(String a){
         String[] parts = a.split("/");
-        this.dimOfNumenator =
+        String [] part1 = parts[1].trim().split(" ");
+        String [] part2 = parts[2].trim().split(" ");
+        for (int i=0;i<part1.length; i++){
+            for (Map.Entry entry: dimOfNumenator.entrySet()) {
+                if () {
+
+                }
+            }
+        }
     }
 }

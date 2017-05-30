@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import static java.lang.Math.abs;
+
 import java.lang.String;
 
 /**
@@ -28,41 +29,51 @@ public class Floating_Point {
         result = 31 * result + (dim != null ? dim.hashCode() : 0);
         return result;
     }
-    public void sum (Floating_Point a) throws Exception{
-        a.toBase();
+
+    public void sum(Floating_Point a) throws Exception {
+        int b = a.dim.toBase();
+        int c = this.dim.toBase();
+        if (this.dim.equals(a.dim)) {
+            this.number = this.number * b + a.number * c;
+        } else {
+            throw new Exception("Not compatible dimmension");
+        }
+    }
+
+    public void sub(Floating_Point a) throws Exception {
+        int b = a.dim.toBase();
+        int c = this.dim.toBase();
+        if (this.dim.equals(a.dim)) {
+            this.number = this.number * b - a.number * c;
+        } else {
+            throw new Exception("Not compatible dimmension");
+        }
+    }
+
+    public void multi(Floating_Point a) throws Exception {
+        int b = a.dim.toBase();
+        int c = this.dim.toBase();
         if (this.dim.equals(a.dim)){
-            this.number +=a.number;
+            this.number = this.number*b*a.number*c;
         }
         else {
             throw new Exception("Not compatible dimmension");
         }
     }
-    public void sub (Floating_Point a) throws Exception{
+
+    public void div(Floating_Point a) throws Exception {
+        int b = a.dim.toBase();
+        int c = this.dim.toBase();
         if (this.dim.equals(a.dim)){
-            this.number -=a.number;
+            this.number = this.number*b/(a.number*c);
         }
         else {
             throw new Exception("Not compatible dimmension");
         }
     }
-    public void multi (Floating_Point a) throws Exception{
-        if (this.dim.equals(a.dim)){
-            this.number *=a.number;
-        }
-        else {
-            throw new Exception("Not compatible dimmension");
-        }
-    }
-    public void div (Floating_Point a) throws Exception{
-        if (this.dim.equals(a.dim)){
-            this.number /=a.number;
-        }
-        else {
-            throw new Exception("Not compatible dimmension");
-        }
-    }
-    public String readFromString(String a){
-        String[] parts = a.split(" ",2);
+
+    public String readFromString(String a) {
+        String[] parts = a.split(" ", 2);
         this.number = Double.parseDouble(parts[1]);
         this.dim.fromString(parts[2]);
     }
