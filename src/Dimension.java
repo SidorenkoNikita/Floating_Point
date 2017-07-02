@@ -46,7 +46,10 @@ public class Dimension {
 
     public int getOrder(String key) {
         if (translationTable.containsKey(key)) {
-            translationTable.get(key);
+            return translationTable.get(key);
+        }
+        else{
+            return 0;
         }
     }
 
@@ -94,27 +97,35 @@ public class Dimension {
         for (Map.Entry entry: dimOfDenominator.entrySet()) {
             result += entry.getValue().toString() + entry.getKey().toString()+" ";
         }
+        return result;
     }
     public int toBase(){
         int result = 0;
         for (Map.Entry entry: dimOfNumenator.entrySet()){
-            result = translationTable.get(entry.getValue().toString());
+            result += getOrder(entry.getValue().toString());
             dimOfNumenator.put(entry.getKey().toString(),"");
         }
         for (Map.Entry entry: dimOfDenominator.entrySet()){
-            result = translationTable.get(entry.getValue().toString());
+            result -= getOrder(entry.getValue().toString());
             dimOfDenominator.put(entry.getKey().toString(),"");
         }
         return result;
     }
     public void fromString(String a){
         String[] parts = a.split("/");
-        String [] part1 = parts[1].trim().split(" ");
-        String [] part2 = parts[2].trim().split(" ");
-        for (int i=0;i<part1.length; i++){
-            for (Map.Entry entry: dimOfNumenator.entrySet()) {
-                if () {
-
+        String [] numenator = parts[1].trim().split(" ");
+        String [] denominator = parts[2].trim().split(" ");
+        for (int i=0;i<numenator.length; i++){
+            for (Map.Entry entry: translationTable.entrySet()) {
+                if (!(numenator[i].split(entry.getKey().toString()).length ==0)) {
+                    dimOfNumenator.put(entry.getKey().toString(),numenator[i]);
+                }
+            }
+        }
+        for (int i=0;i<denominator.length; i++){
+            for (Map.Entry entry: translationTable.entrySet()) {
+                if (!(denominator[i].split(entry.getKey().toString()).length == 0)) {
+                    dimOfNumenator.put(entry.getKey().toString(),denominator[i]);
                 }
             }
         }

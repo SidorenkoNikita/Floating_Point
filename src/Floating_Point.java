@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.pow;
 
 import java.lang.String;
 
@@ -34,17 +35,33 @@ public class Floating_Point {
         int b = a.dim.toBase();
         int c = this.dim.toBase();
         if (this.dim.equals(a.dim)) {
-            this.number = this.number * b + a.number * c;
+            this.number = this.number * pow(10,b) + a.number * pow(10,c);
         } else {
             throw new Exception("Not compatible dimmension");
         }
+    }
+
+    public Double getNumber() {
+        return number;
+    }
+
+    public void setNumber(Double number) {
+        this.number = number;
+    }
+
+    public Dimension getDim() {
+        return dim;
+    }
+
+    public void setDim(Dimension dim) {
+        this.dim = dim;
     }
 
     public void sub(Floating_Point a) throws Exception {
         int b = a.dim.toBase();
         int c = this.dim.toBase();
         if (this.dim.equals(a.dim)) {
-            this.number = this.number * b - a.number * c;
+            this.number = this.number * pow(10,b) - a.number * pow(10,c);
         } else {
             throw new Exception("Not compatible dimmension");
         }
@@ -54,7 +71,7 @@ public class Floating_Point {
         int b = a.dim.toBase();
         int c = this.dim.toBase();
         if (this.dim.equals(a.dim)){
-            this.number = this.number*b*a.number*c;
+            this.number = this.number*pow(10,b)*a.number*pow(10,c);
         }
         else {
             throw new Exception("Not compatible dimmension");
@@ -65,14 +82,14 @@ public class Floating_Point {
         int b = a.dim.toBase();
         int c = this.dim.toBase();
         if (this.dim.equals(a.dim)){
-            this.number = this.number*b/(a.number*c);
+            this.number = this.number*pow(10,b)/a.number*pow(10,c);
         }
         else {
             throw new Exception("Not compatible dimmension");
         }
     }
 
-    public String readFromString(String a) {
+    public void readFromString(String a) {
         String[] parts = a.split(" ", 2);
         this.number = Double.parseDouble(parts[1]);
         this.dim.fromString(parts[2]);

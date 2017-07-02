@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.HashMap;
 
 import static org.junit.Assert.*;
 
@@ -7,159 +8,215 @@ import static org.junit.Assert.*;
  */
 public class Floating_PointTest {
     @org.junit.Test
-    public void checkForLenght() throws Exception {
-        Dimension dim = new Dimension();
-        dim.setDimOfExp(1);
-        dim.setDimOfMantis(2);
-        Floating_Point e = new Floating_Point();
-        Floating_Point f = new Floating_Point();
-        e.setDim(dim);
-        e.setExp(1);
-        e.setMantis(2);
-        f.setDim(dim);
-        f.setExp(12);
-        f.setMantis(123);
-        assertEquals(true, e.checkForLenght());
-        assertEquals(false,f.checkForLenght());
-    }
-
-    @org.junit.Test
-    public void checkForLenghtOfExp() throws Exception {
-
-    }
-
-    @org.junit.Test
-    public void sum() throws Exception {
-        Dimension dim = new Dimension();
-        dim.setDimOfExp(1);
-        dim.setDimOfMantis(2);
-        Floating_Point e = new Floating_Point();
-        Floating_Point f = new Floating_Point();
+    public void sum() {
         Floating_Point b = new Floating_Point();
-        Floating_Point a = new Floating_Point();
-        a.setDim(dim);
-        a.setExp(1);
-        a.setMantis(7);
-        b.setDim(dim);
-        b.setMantis(5);
-        b.setExp(1);
-        e.setDim(dim);
-        e.setExp(1);
-        e.setMantis(2);
-        f.setDim(dim);
-        f.setExp(12);
-        f.setMantis(123);
+        Floating_Point c = new Floating_Point();
+        Floating_Point d = new Floating_Point();
+        Floating_Point e = new Floating_Point();
+        Dimension a = new Dimension();
+        Dimension aa = new Dimension();
+        HashMap<String, String> dna = new HashMap<>();
+        HashMap<String, String> dda = new HashMap<>();
+        HashMap<String, Integer> tta = new HashMap<>();
+        HashMap<String, String> eta = new HashMap<>();
+        HashMap<String, String> dnaa = new HashMap<>();
+        HashMap<String, String> ddaa = new HashMap<>();
+        HashMap<String, Integer> ttaa = new HashMap<>();
+        HashMap<String, String> etaa = new HashMap<>();
+        dna.put("грамм", "кило");
+        dda.put("", "метр");
+        tta.put("кило", 3);
+        dnaa.put("грамм", "кило");
+        ddaa.put("", "метр");
+        ttaa.put("кило", 3);
+        a.setTranslationTable(tta);
+        a.setExceptionTable(eta);
+        a.setDimOfNumenator(dna);
+        a.setDimOfDenominator(ddaa);
+        aa.setTranslationTable(ttaa);
+        aa.setExceptionTable(etaa);
+        aa.setDimOfNumenator(dnaa);
+        aa.setDimOfDenominator(ddaa);
+        b.setDim(a);
+        d.setDim(aa);
+        b.setNumber(2.1);
+        d.setNumber(0.0);
         try {
-            e.sum(f);
-            assertEquals(true,false);
+            b.sum(c);
         }
-        catch (IOException c){
-            assertEquals(true,true);
+        catch (Exception k) {
         }
-        e.sum(b);
-        assertEquals(a,e);
-
+        try {
+            b.sum(d);
+        }
+        catch (Exception j) {
+        }
+        try {
+            d.sum(b);
+        } catch (Exception l) {
+        }
+        assertEquals(true, d.getDim().equals(b.getDim()));
+        assertEquals(true, b.equals(d));
 
     }
-
     @org.junit.Test
-    public void sub() throws Exception {
-        Dimension dim = new Dimension();
-        dim.setDimOfExp(1);
-        dim.setDimOfMantis(2);
-        Floating_Point e = new Floating_Point();
-        Floating_Point f = new Floating_Point();
+    public void sub() {
         Floating_Point b = new Floating_Point();
-        Floating_Point a = new Floating_Point();
-        a.setDim(dim);
-        a.setExp(1);
-        a.setMantis(2);
-        b.setDim(dim);
-        b.setMantis(5);
-        b.setExp(1);
-        e.setDim(dim);
-        e.setExp(1);
-        e.setMantis(2);
-        f.setDim(dim);
-        f.setExp(12);
-        f.setMantis(123);
+        Floating_Point c = new Floating_Point();
+        Floating_Point d = new Floating_Point();
+        Floating_Point e = new Floating_Point();
+        Dimension a = new Dimension();
+        Dimension aa = new Dimension();
+        HashMap<String, String> dna = new HashMap<>();
+        HashMap<String, String> dda = new HashMap<>();
+        HashMap<String, Integer> tta = new HashMap<>();
+        HashMap<String, String> eta = new HashMap<>();
+        HashMap<String, String> dnaa = new HashMap<>();
+        HashMap<String, String> ddaa = new HashMap<>();
+        HashMap<String, Integer> ttaa = new HashMap<>();
+        HashMap<String, String> etaa = new HashMap<>();
+        dna.put("грамм", "кило");
+        dda.put("", "метр");
+        tta.put("кило", 3);
+        dnaa.put("грамм", "кило");
+        ddaa.put("", "метр");
+        ttaa.put("кило", 3);
+        a.setTranslationTable(tta);
+        a.setExceptionTable(eta);
+        a.setDimOfNumenator(dna);
+        a.setDimOfDenominator(ddaa);
+        aa.setTranslationTable(ttaa);
+        aa.setExceptionTable(etaa);
+        aa.setDimOfNumenator(dnaa);
+        aa.setDimOfDenominator(ddaa);
+        b.setDim(a);
+        d.setDim(aa);
+        b.setNumber(2.1);
+        d.setNumber(0.0);
         try {
-            e.sub(f);
-            assertEquals(true,false);
+            b.sub(c);
         }
-        catch (IOException c){
-            assertEquals(true,true);
+        catch (Exception k) {
         }
-        b.sub(a);
-        assertEquals(a,e);
-
-
+        try {
+            b.sub(d);
+        }
+        catch (Exception j) {
+        }
+        try {
+            d.sub(b);
+        } catch (Exception l) {
+        }
+        d.setNumber(-d.getNumber());
+        assertEquals(true, d.getDim().equals(b.getDim()));
+        assertEquals(true, b.equals(d));
 
     }
-
     @org.junit.Test
-    public void div() throws Exception {
-        Dimension dim = new Dimension();
-        dim.setDimOfExp(1);
-        dim.setDimOfMantis(2);
-        Floating_Point e = new Floating_Point();
-        Floating_Point f = new Floating_Point();
+    public void multi() {
         Floating_Point b = new Floating_Point();
-        Floating_Point a = new Floating_Point();
-        a.setDim(dim);
-        a.setExp(1);
-        a.setMantis(2);
-        b.setDim(dim);
-        b.setMantis(6);
-        b.setExp(1);
-        e.setDim(dim);
-        e.setExp(0);
-        e.setMantis(3);
-        f.setDim(dim);
-        f.setExp(12);
-        f.setMantis(123);
+        Floating_Point c = new Floating_Point();
+        Floating_Point d = new Floating_Point();
+        Floating_Point e = new Floating_Point();
+        Dimension a = new Dimension();
+        Dimension aa = new Dimension();
+        HashMap<String, String> dna = new HashMap<>();
+        HashMap<String, String> dda = new HashMap<>();
+        HashMap<String, Integer> tta = new HashMap<>();
+        HashMap<String, String> eta = new HashMap<>();
+        HashMap<String, String> dnaa = new HashMap<>();
+        HashMap<String, String> ddaa = new HashMap<>();
+        HashMap<String, Integer> ttaa = new HashMap<>();
+        HashMap<String, String> etaa = new HashMap<>();
+        dna.put("грамм", "кило");
+        dda.put("", "метр");
+        tta.put("кило", 3);
+        dnaa.put("грамм", "кило");
+        ddaa.put("", "метр");
+        ttaa.put("кило", 3);
+        a.setTranslationTable(tta);
+        a.setExceptionTable(eta);
+        a.setDimOfNumenator(dna);
+        a.setDimOfDenominator(ddaa);
+        aa.setTranslationTable(ttaa);
+        aa.setExceptionTable(etaa);
+        aa.setDimOfNumenator(dnaa);
+        aa.setDimOfDenominator(ddaa);
+        b.setDim(a);
+        d.setDim(aa);
+        b.setNumber(2.1);
+        d.setNumber(1.0);
         try {
-            e.div(f);
-            assertEquals(true,false);
+            b.multi(c);
         }
-        catch (IOException c){
-            assertEquals(true,true);
+        catch (Exception k) {
         }
-        b.div(a);
-        assertEquals(b,e);
+        try {
+            b.multi(d);
+        }
+        catch (Exception j) {
+        }
+        try {
+            d.multi(b);
+        } catch (Exception l) {
+        }
+        d.setNumber(-d.getNumber());
+        assertEquals(true, d.getDim().equals(b.getDim()));
+        assertEquals(true, b.equals(d));
 
     }
-
     @org.junit.Test
-    public void multi() throws Exception {
-        Dimension dim = new Dimension();
-        dim.setDimOfExp(1);
-        dim.setDimOfMantis(2);
-        Floating_Point e = new Floating_Point();
-        Floating_Point f = new Floating_Point();
+    public void div() {
         Floating_Point b = new Floating_Point();
-        Floating_Point a = new Floating_Point();
-        a.setDim(dim);
-        a.setExp(1);
-        a.setMantis(2);
-        b.setDim(dim);
-        b.setMantis(1);
-        b.setExp(1);
-        e.setDim(dim);
-        e.setExp(2);
-        e.setMantis(2);
-        f.setDim(dim);
-        f.setExp(12);
-        f.setMantis(123);
+        Floating_Point c = new Floating_Point();
+        Floating_Point d = new Floating_Point();
+        Floating_Point e = new Floating_Point();
+        Dimension a = new Dimension();
+        Dimension aa = new Dimension();
+        HashMap<String, String> dna = new HashMap<>();
+        HashMap<String, String> dda = new HashMap<>();
+        HashMap<String, Integer> tta = new HashMap<>();
+        HashMap<String, String> eta = new HashMap<>();
+        HashMap<String, String> dnaa = new HashMap<>();
+        HashMap<String, String> ddaa = new HashMap<>();
+        HashMap<String, Integer> ttaa = new HashMap<>();
+        HashMap<String, String> etaa = new HashMap<>();
+        dna.put("грамм", "кило");
+        dda.put("", "метр");
+        tta.put("кило", 3);
+        dnaa.put("грамм", "кило");
+        ddaa.put("", "метр");
+        ttaa.put("кило", 3);
+        a.setTranslationTable(tta);
+        a.setExceptionTable(eta);
+        a.setDimOfNumenator(dna);
+        a.setDimOfDenominator(ddaa);
+        aa.setTranslationTable(ttaa);
+        aa.setExceptionTable(etaa);
+        aa.setDimOfNumenator(dnaa);
+        aa.setDimOfDenominator(ddaa);
+        b.setDim(a);
+        d.setDim(aa);
+        b.setNumber(2.1);
+        d.setNumber(1.0);
         try {
-            e.multi(f);
-            assertEquals(true,false);
+            b.div(c);
         }
-        catch (IOException c){
-            assertEquals(true,true);
+        catch (Exception k) {
         }
-        b.multi(a);
-        assertEquals(b,e);
+        try {
+            b.div(d);
+        }
+        catch (Exception j) {
+        }
+        d.setNumber(4.41);
+        try {
+            d.multi(b);
+        } catch (Exception l) {
+        }
+        d.setNumber(-d.getNumber());
+        assertEquals(true, d.getDim().equals(b.getDim()));
+        assertEquals(true, b.equals(d));
 
     }
 
